@@ -3,7 +3,8 @@
 	kind: enyo.VFlexBox,
 	components: [
 		{content: "Welcome to Boxcar for webOS"},
-		{kind: "Input", name: "username", hint: "Username", alwaysLooksFocused: "true", autocorrect: "false"},
+		{kind: "Input", name: "username", hint: "Username", alwaysLooksFocused: "true", autocorrect: "false",
+			spellcheck: "false", autoCapitalize: "lowercase", inputType: "email"},
 		{kind: "PasswordInput", name: "password", hint: "Password", alwaysLooksFocused: "true"},
 		{kind: "Button", caption: "Login", className: "enyo-button-affirmative", onclick: "loginClick"}
 	],
