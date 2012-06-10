@@ -69,9 +69,9 @@ enyo.kind({
 			enyo.application.securePrefs['access_token'] = access_info['access_token']; 
 		}
 		this.saveSecurePrefs();
-		enyo.error("Login Successful");
+		enyo.log("Login Successful");
 		socket = new WebSocket("ws://farm.boxcar.io:8080/websocket");
-		enyo.error("Socket Created");
+		enyo.log("Socket Created");
 		socket.onopen = function (evt) {
 					enyo.error("Socket Opened");
 					socket.send("{\"access_token\": \"" + access_info['access_token'] + "\"}");
@@ -114,6 +114,7 @@ enyo.kind({
 	},
 	dashboardClose: function(inSender) {
 		//this.$.status.setContent("Closed dashboard.");
+		
 	},
 	layerSwiped: function(inSender, layer) {
 		//this.$.status.setContent("Swiped layer: "+layer.text);
@@ -129,28 +130,19 @@ enyo.kind({
 						title: "Boxcar", 
 						text: "Listening for Notifications"});
 			enyo.windows.addBannerMessage("Boxcar Logged In", listener.messageIconsSmall['Other']);
+			//var appWindow = enyo.windows.fetchWindow("mainApp");
+			//if(appWindow){
+			//	
+			//}
 		} else if (messageData['error_code'] == null && messageData['message'] != null) {
 			enyo.log(messageData);
-			var messageIcon = "";
-			var messageIconSmall = "";
-			if(messageData['provider_name'] == "Google Voice"){
-				messageIcon = listener.messageIcons['GoogleVoice'];
-				messageIconSmall = listener.messageIconsSmall['GoogleVoice'];
-			} else if(messageData['provider_name'] == "Email Account"){
-				messageIcon = listener.messageIcons['EmailAccount'];
-				messageIconSmall = listener.messageIconsSmall['EmailAccount'];
-			} else if(messageData['provider_name'] == "Facebook Account"){
-				messageIcon = listener.messageIcons['Facebook'];
-				messageIconSmall = listener.messageIconsSmall['Facebook'];
-			} else {
-				//messageIcon = messageData['icon'];
-				messageIcon = listener.messageIcons['Other'];
-				messageIconSmall = listener.messageIconsSmall['Other'];
-			}
-			enyo.windows.addBannerMessage(messageData['from_screen_name'] + " - " + messageData['message'], '{}', messageIconSmall, 'defaultapp', 'default');
-			listener.$.dashboard.push({icon: messageIcon, 
+			// old way
+			/*listener.$.dashboard.push({icon: messageIcon, 
 						title:messageData['from_screen_name'], 
-						text:messageData['message']});
+						text:messageData['message']});*/
+			
+			// new way
+			enyo.application.dashboardManager.displayMessage(messageData);
 		}else  {
 			if(messageData['error_code'] == 500){
 				listener.login(true);
@@ -164,6 +156,9 @@ enyo.kind({
 		// here you can do any app initialization stuff - prefs, intitialize database, etc.
 		// for this example, we'll just get some app preferences
 		this.getPrefs();
+		
+		enyo.application.dashboardManager = new DashboardManager();
+		
 	},
 	// this is but one way of many for handling app preferences
 	getPrefs: function () {
@@ -221,6 +216,9 @@ enyo.kind({
 			this.relaunch(params);
 		} else {
 			this.getStatus();
+			return;
+			//params.action = "openHeadless";
+			//this.relaunch(params);
 		}
 		//this.login();
 		

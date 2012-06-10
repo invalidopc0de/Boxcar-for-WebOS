@@ -7,8 +7,15 @@
 <body>
 <script type="text/javascript">
 	console.log("My awesome app headless index.html loaded");
+	
+	var unloadFunc = function(){
+			console.info("headless window UNLOAD");
+			window.removeEventListener('unload', unloadFunc);
+	};
+	window.addEventListener('unload', unloadFunc);
+	
 	var launcher = enyo.application.launcher = new notificationListener();
- 
+	
 	enyo.applicationRelaunchHandler = function (params) {
 		enyo.application.launcher.relaunch(params);
 	};
