@@ -199,9 +199,9 @@ enyo.kind({
 		}
 		//params = { action: "doSomething" };
 		//this.$.LaunchMe.call({"id" : "com.invalidopcode.boxcar", "params": params});
-		this.$.setAlarm.call({"wakeup":false, "key":"com.invalidopcode.boxcar.relaunchTimer", "uri":"palm://com.palm.applicationManager/launch",
-                      "params" : {"id":"com.invalidopcode.boxcar"},
-                      "in": "00:00:1"});
+		//this.$.setAlarm.call({"wakeup":false, "key":"com.invalidopcode.boxcar.relaunchTimer", "uri":"palm://com.palm.applicationManager/launch",
+                //      "params" : {"id":"com.invalidopcode.boxcar"},
+                //      "in": "00:00:1"});
 	},	
 	
 	constructor: function() {
