@@ -1,0 +1,14 @@
+{
+"id": "com.invalidopcode.boxcar.service",
+"description": "Boxcar Service",
+"activityTimeout" : 30,
+"services": [{
+"name": "com.invalidopcode.boxcar.service",
+"description": "helloworld example",
+"commands": [{
+    "name" : "hello",
+    "assistant" : "BoxcarCommandAssistant",
+    "public" : true
+    }]
+ }]
+}

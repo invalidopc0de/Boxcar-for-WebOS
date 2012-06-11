@@ -1,0 +1,12 @@
+{
+  "id": "com.invalidopcode.boxcar",
+  "package_format_version": 2,
+  "loc_name": "Boxcar JS Service",
+  "version": "1.0.0",
+  "icon": "icon.png",
+  "miniicon": "icon.png",
+  "vendor": "Mark Saunders",
+  "vendorurl": "twitter.com/_invalidopcode_",
+  "app": "com.invalidopcode.boxcar"
+}
+ // "services": ["com.invalidopcode.boxcar.service"]

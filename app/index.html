@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+	<title>Single Pane Layout</title>
+	<script src="../../../../framework/enyo/1.0/framework/enyo.js" type="text/javascript"></script>
+</head>
+<body>
+<script type="text/javascript">
+	console.log("My awesome app headless index.html loaded");
+	
+	var unloadFunc = function(){
+			console.info("headless window UNLOAD");
+			window.removeEventListener('unload', unloadFunc);
+	};
+	window.addEventListener('unload', unloadFunc);
+	
+	var launcher = enyo.application.launcher = new notificationListener();
+	
+	enyo.applicationRelaunchHandler = function (params) {
+		enyo.application.launcher.relaunch(params);
+	};
+ 
+	launcher.startup();
+</script>
+</body>
+</html>
